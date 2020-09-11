@@ -35,12 +35,17 @@
             this.flPanel = new System.Windows.Forms.TableLayoutPanel();
             this.cmsRmb = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.loadDefaultTimersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsAdd = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addTimerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addStopwatchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsRmb.SuspendLayout();
+            this.cmsAdd.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnAdd
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAdd.ContextMenuStrip = this.cmsAdd;
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdd.Location = new System.Drawing.Point(695, 12);
             this.btnAdd.Name = "btnAdd";
@@ -95,6 +100,28 @@
             this.loadDefaultTimersToolStripMenuItem.Text = "Load Default Timers";
             this.loadDefaultTimersToolStripMenuItem.Click += new System.EventHandler(this.loadDefaultTimersToolStripMenuItem_Click);
             // 
+            // cmsAdd
+            // 
+            this.cmsAdd.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addTimerToolStripMenuItem,
+            this.addStopwatchToolStripMenuItem});
+            this.cmsAdd.Name = "cmsAdd";
+            this.cmsAdd.Size = new System.Drawing.Size(156, 48);
+            // 
+            // addTimerToolStripMenuItem
+            // 
+            this.addTimerToolStripMenuItem.Name = "addTimerToolStripMenuItem";
+            this.addTimerToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.addTimerToolStripMenuItem.Text = "Add Timer";
+            this.addTimerToolStripMenuItem.Click += new System.EventHandler(this.addTimerToolStripMenuItem_Click);
+            // 
+            // addStopwatchToolStripMenuItem
+            // 
+            this.addStopwatchToolStripMenuItem.Name = "addStopwatchToolStripMenuItem";
+            this.addStopwatchToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.addStopwatchToolStripMenuItem.Text = "Add Stopwatch";
+            this.addStopwatchToolStripMenuItem.Click += new System.EventHandler(this.addStopwatchToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -113,6 +140,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.cmsRmb.ResumeLayout(false);
+            this.cmsAdd.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -125,6 +153,9 @@
         private System.Windows.Forms.TableLayoutPanel flPanel;
         private System.Windows.Forms.ContextMenuStrip cmsRmb;
         private System.Windows.Forms.ToolStripMenuItem loadDefaultTimersToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip cmsAdd;
+        private System.Windows.Forms.ToolStripMenuItem addTimerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addStopwatchToolStripMenuItem;
     }
 }
 

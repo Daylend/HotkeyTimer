@@ -30,7 +30,17 @@ namespace KeyTimer
             {
                 foreach(TimerData timer in timers)
                 {
-                    flPanel.Controls.Add(new Timer(timer.timerName, timer.secondDuration, timer.key));
+                    switch (timer.type)
+                    {
+                        case TimerData.TimerType.Timer:
+                            flPanel.Controls.Add(new Timer(timer.timerName, timer.secondDuration, timer.key));
+                            break;
+                        case TimerData.TimerType.Stopwatch:
+                            flPanel.Controls.Add(new Stopwatch(timer.timerName, timer.secondDuration, timer.key));
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }
@@ -44,9 +54,16 @@ namespace KeyTimer
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             List<TimerData> timers = new List<TimerData>();
-            foreach(Timer control in flPanel.Controls)
+            foreach (var control in flPanel.Controls)
             {
-                timers.Add(new TimerData(control.timerName, control.interval, control.registeredKey));
+                if(control is Timer t)
+                {
+                    timers.Add(new TimerData(t.timerName, t.interval, t.registeredKey, TimerData.TimerType.Timer));
+                }
+                else if(control is Stopwatch s)
+                {
+                    timers.Add(new TimerData(s.timerName, s.interval, s.registeredKey, TimerData.TimerType.Stopwatch));
+                }
             }
             SaveTimers(timers);
         }
@@ -81,6 +98,7 @@ namespace KeyTimer
 
         private void loadDefaultTimers()
         {
+            flPanel.Controls.Add(new Stopwatch("Stopwatch", 0, Keys.F9));
             flPanel.Controls.Add(new Timer("PA 1", 150, Keys.F1));
             flPanel.Controls.Add(new Timer("PA 2", 150, Keys.F2));
             flPanel.Controls.Add(new Timer("Draught", 900, Keys.D7));
@@ -90,6 +108,18 @@ namespace KeyTimer
         {
             flPanel.Controls.Clear();
             loadDefaultTimers();
+        }
+
+        private void addTimerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Timer timer = new Timer("New Timer", 60, Keys.F1);
+            flPanel.Controls.Add(timer);
+        }
+
+        private void addStopwatchToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Stopwatch s = new Stopwatch("Stopwatch", 0, Keys.F1);
+            flPanel.Controls.Add(s);
         }
     }
 }

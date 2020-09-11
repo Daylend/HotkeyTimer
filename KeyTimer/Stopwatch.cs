@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 
 namespace KeyTimer
 {
-    public partial class Timer : UserControl
+    public partial class Stopwatch : UserControl
     {
         bool waitingForKey = false;
         public Keys registeredKey = Keys.MediaPlayPause;
@@ -25,7 +25,7 @@ namespace KeyTimer
         [DllImport("User32.dll")]
         private static extern short GetAsyncKeyState(int vKey);
 
-        public Timer(string timerName, int secondDuration, Keys key)
+        public Stopwatch(string timerName, int secondDuration, Keys key)
         {
             InitializeComponent();
             interval = secondDuration;
@@ -56,9 +56,8 @@ namespace KeyTimer
         {
             labelTime.Text = TimeSpan.FromSeconds(time).ToString(@"hh\:mm\:ss");
 
-            if (time-- <= 0)
+            if(time++ > 99999999)
             {
-                colorBox.BackColor = Color.LimeGreen;
                 timerTimer.Stop();
             }
         }
@@ -77,7 +76,7 @@ namespace KeyTimer
             }
             else
             {
-                foreach (Keys key in (Keys[])Enum.GetValues(typeof(Keys)))
+                foreach(Keys key in (Keys[])Enum.GetValues(typeof(Keys)))
                 {
                     bool isPressed = keyPressed(key);
                     if (isPressed && key != Keys.Escape && key != Keys.MediaPlayPause && key != Keys.LButton)
@@ -118,7 +117,7 @@ namespace KeyTimer
             time = interval;
             timerTimer.Stop();
             timerTimer.Start();
-            colorBox.BackColor = Color.Firebrick;
+            //colorBox.BackColor = Color.Firebrick;
         }
 
         private bool keyPressed(Keys key)
